@@ -65,7 +65,11 @@ fun main() {
  * Пользователь задает время в часах, минутах и секундах, например, 8:20:35.
  * Рассчитать время в секундах, прошедшее с начала суток (30035 в данном случае).
  */
+<<<<<<< HEAD
 fun seconds(hours: Int, minutes: Int, seconds: Int): Int = hours * 36
+=======
+fun seconds(hours: Int, minutes: Int, seconds: Int): Int = minutes*60 + seconds + hours*3600
+>>>>>>> lesson1tesk1 fun seconds сделанно
 
 /**
  * Тривиальная (1 балл)
