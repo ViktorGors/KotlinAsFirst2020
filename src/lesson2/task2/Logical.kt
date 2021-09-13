@@ -43,7 +43,6 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
 fun daysInMonth(month: Int, year: Int): Int {
     var February: Int
     if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) February = 29 else February = 28
-    //return if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) 31
     return when (month) {
         1 -> 31
         3 -> 31
@@ -72,6 +71,7 @@ fun circleInside(
     x2: Double, y2: Double, r2: Double
 ): Boolean = TODO()
 
+
 /**
  * Средняя (3 балла)
  *
@@ -81,4 +81,14 @@ fun circleInside(
  * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
  * Вернуть true, если кирпич пройдёт
  */
-fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean = TODO()
+fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
+    var edge1: Int = 0
+    var edge2: Int = 0
+    if (s >= a) edge1 =+ 1 else
+            if (s >= b) edge1 =+ 1 else
+                    if (s >= c) edge1 =+ 1 else edge1 =+ 0
+    if (r >= a) edge2 =+ 1 else
+        if (r >= b) edge2 =+ 1 else
+            if (r >= c) edge2 =+ 1 else edge2 =+ 0
+    return if ((edge1 != 0)&&(edge2 != 0)) true else false
+}
