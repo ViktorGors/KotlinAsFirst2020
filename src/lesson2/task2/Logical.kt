@@ -3,6 +3,10 @@
 package lesson2.task2
 
 import lesson1.task1.sqr
+import java.util.Collections.max
+import java.util.Collections.min
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * Пример
@@ -82,13 +86,16 @@ fun circleInside(
  * Вернуть true, если кирпич пройдёт
  */
 fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
-    var edge1: Int = 0
-    var edge2: Int = 0
-    if (s >= a) edge1 =+ 1 else
-            if (s >= b) edge1 =+ 1 else
-                    if (s >= c) edge1 =+ 1 else edge1 =+ 0
-    if (r >= a) edge2 =+ 1 else
-        if (r >= b) edge2 =+ 1 else
-            if (r >= c) edge2 =+ 1 else edge2 =+ 0
-    return if ((edge1 != 0)&&(edge2 != 0)) true else false
+    val minSideOfTheHole = min(r, s) // находим меньшую часть отверствия
+    val maxSideOfTheHole = max(r, s) // находим большую часть отверствия
+    val minSide = minOf(a, b, c)
+    val mediumMinSide = when (minSide) {
+        a -> min(b, c)
+        b -> min(a, c)
+        c -> min(a, b)
+        else -> maxSideOfTheHole + 1
+    }
+    return if ((minSide <= minSideOfTheHole) && (mediumMinSide <= maxSideOfTheHole)) true else false
+
 }
+
