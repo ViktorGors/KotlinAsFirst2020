@@ -25,7 +25,7 @@ fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
 fun isNumberHappy(number: Int): Boolean {
     val numeral12 = (number / 1000) + ((number / 100) % 10)
     val numeral34 = ((number / 10) % 10) + (number % 10)
-    return if (numeral12 == numeral34) true else false
+    return (numeral12 == numeral34)
 }
 
 /**
@@ -95,7 +95,7 @@ fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
         c -> min(a, b)
         else -> maxSideOfTheHole + 1
     }
-    return if ((minSide <= minSideOfTheHole) && (mediumMinSide <= maxSideOfTheHole)) true else false
+    return ((minSide <= minSideOfTheHole) && (mediumMinSide <= maxSideOfTheHole))
 
 }
 
