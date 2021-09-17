@@ -146,7 +146,6 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
     return if (maxSide > (mediumSide + minSide)) -1 else
         if ((cosA == 0.0) || (cosB == 0.0) || (cosC == 0.0)) 1 else
             if (((cosA > 0.0) && (cosB > 0.0) && (cosC > 0.0)) && ((1 > cosA) && (1 > cosB) && (1 > cosC))) 0 else 2
-
 }
 
 /**
@@ -157,5 +156,5 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = if ((b < c) || (d < a)) -1 else (min(b, d) - max(a, c)) //Меня искренни напрягает то, что она в 1 строку... и почему 0 это пересечение?
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = if ((b < c) || (d < a)) -1 else (min(b, d) - max(a, c)) //Меня искренни напрягает то, что она в 1 строку а предыдущая в 12
 
