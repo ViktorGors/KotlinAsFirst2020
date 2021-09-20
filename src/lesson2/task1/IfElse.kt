@@ -69,12 +69,17 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * Мой возраст. Для заданного 0 < n < 200, рассматриваемого как возраст человека,
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
-fun ageDescription(age: Int): String = when {
+
+
+fun ageDescription(age: Int): String = TODO()
+/**
+    when {
     age % 10 == 1 -> "$age год"
     age / 10 % 10 == 1 -> "$age лет"
     age / 10 % 10 == 9 -> "$age лет"
     else -> "$age года"
 }
+ */
 
 
 
@@ -134,18 +139,14 @@ fun rookOrBishopThreatens(
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
     val maxSide = maxOf(a, b, c)
-    val minSide: Double = minOf(a, b, c)
-    val mediumSide: Double = when (minSide) {
-        a -> min(b, c)
-        b -> min(a, c)
-        else -> min(a, b)
-    }
+    val minSide = minOf(a, b, c)
+    val mediumSide = (a + b + c) - (maxSide + minSide)
     val cosA: Double = (b * b + c * c - a * a) / (2 * b * c)
     val cosB: Double = (a * a + c * c - b * b) / (2 * a * c)
     val cosC: Double = (a * a + b * b - c * c) / (2 * a * b)
-    return if (maxSide > (mediumSide + minSide)) -1 else
-        if ((cosA == 0.0) || (cosB == 0.0) || (cosC == 0.0)) 1 else
-            if (((cosA > 0.0) && (cosB > 0.0) && (cosC > 0.0)) && ((1 > cosA) && (1 > cosB) && (1 > cosC))) 0 else 2
+    return if (maxSide > (mediumSide + minSide)) -1
+    else if ((cosA == 0.0) || (cosB == 0.0) || (cosC == 0.0)) 1
+    else if (((cosA > 0.0) && (cosB > 0.0) && (cosC > 0.0)) && ((1 > cosA) && (1 > cosB) && (1 > cosC))) 0 else 2
 }
 
 /**
@@ -156,5 +157,5 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = if ((b < c) || (d < a)) -1 else (min(b, d) - max(a, c)) //Меня искренни напрягает то, что она в 1 строку а предыдущая в 12
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = if ((b < c) || (d < a)) -1 else (min(b, d) - max(a, c))
 
