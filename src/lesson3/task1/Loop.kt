@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import kotlinx.html.I
 import kotlin.math.max
 import kotlin.math.sqrt
 
@@ -229,6 +230,25 @@ fun revert(n: Int): Int {
  */
 fun isPalindrome(n: Int): Boolean = TODO()
 
+/** {
+    var N: Int = n
+    var j: Int = 0
+    var ten: Int = 1
+    var k: Boolean = true
+    while (N > 10) {
+        N /= 10
+        ten *= 10
+        j += 1
+    }
+    N = n
+    for (i in 1..j) {
+        if ((N / (ten / i)) % (j - 1) == (N % (10 * i)) / (j - i)) continue
+        if ((N / (ten / i)) % (j - 1) != (N % (10 * i)) / (j - i)) k = false
+        break
+    }
+    return k
+}
+*/
 
 /**
  * Средняя (3 балла)
@@ -271,7 +291,35 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int
+//= arrayOf() //.set- заменить опред элемент //.get вывести определенный элемент //.size - кол элемент
+// .forEach перебор масива //indexOf() ищет нужный элемент, его индекс
+fun squareSequenceDigit(n: Int): Int {
+
+    var sequence = mutableListOf(0, 1, 4, 9)
+    var element: Int = 0
+    var Elemen: Int = 0
+    var j: Int = 0 // степнь
+    var ten: Int = 1
+    for (i in 4..27) { // тестовый момент
+        element = i * i
+        Elemen = element
+        while (Elemen >= 10) {
+            ten *= 10
+            Elemen /= 10
+            j += 1
+        }
+        while (j != 0) {
+            sequence.add(element / ten)
+            j -= 1
+            ten /= 10
+        }
+        j = 0
+        ten = 1
+    }
+    return sequence.get(n)
+}
+
 
 /**
  * Сложная (5 баллов)
