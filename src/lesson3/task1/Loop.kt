@@ -301,8 +301,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 
-//= arrayOf() //.set- заменить опред элемент //.get вывести определенный элемент //.size - кол элемент
-// .forEach перебор масива //indexOf() ищет нужный элемент, его индекс
+
 fun squareSequenceDigit(n: Int): Int {
     var aN: Int
     var sequenceMirror = mutableListOf(0)
@@ -320,7 +319,7 @@ fun squareSequenceDigit(n: Int): Int {
             sequence.add(sequenceMirror.last())
             sequenceMirror.remove(sequenceMirror.last())
         }
-        //sequence.remove(sequenceMirror.last())
+
     }
 
     return sequence.get(n)
