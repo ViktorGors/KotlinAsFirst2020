@@ -185,11 +185,11 @@ fun lcm(m: Int, n: Int): Int {
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
-    var k: Int = 1 // если K: 1- взаимно простые, 0- нет
+    var k = true // если k: true взаимно простые, folse нет
     var maxNumber: Int = max(m, n)
     for (i in 2..maxNumber)
-        if ((m % i == 0) && (n % i == 0)) k = 0 else k += 0
-    return (k == 1)
+        if ((m % i == 0) && (n % i == 0)) k = false
+    return k
 }
 
 /**

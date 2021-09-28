@@ -141,12 +141,13 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
     val maxSide = maxOf(a, b, c)
     val minSide = minOf(a, b, c)
     val mediumSide = (a + b + c) - (maxSide + minSide)
-    val cosA: Double = (b * b + c * c - a * a) / (2 * b * c)
-    val cosB: Double = (a * a + c * c - b * b) / (2 * a * c)
-    val cosC: Double = (a * a + b * b - c * c) / (2 * a * b)
+    val cosA = (b * b + c * c - a * a) / (2 * b * c)
+    val cosB = (a * a + c * c - b * b) / (2 * a * c)
+    val cosC = (a * a + b * b - c * c) / (2 * a * b)
     return if (maxSide > (mediumSide + minSide)) -1
     else if ((cosA == 0.0) || (cosB == 0.0) || (cosC == 0.0)) 1
-    else if (((cosA > 0.0) && (cosB > 0.0) && (cosC > 0.0)) && ((1 > cosA) && (1 > cosB) && (1 > cosC))) 0 else 2
+    else if (((cosA > 0.0) && (cosB > 0.0) && (cosC > 0.0)) && ((1 > cosA) && (1 > cosB) && (1 > cosC))) 0
+    else 2
 }
 
 /**
