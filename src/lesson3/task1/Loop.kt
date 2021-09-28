@@ -292,14 +292,15 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 
-
+//= arrayOf() //.set- заменить опред элемент //.get вывести определенный элемент //.size - кол элемент
+// .forEach перебор масива //indexOf() ищет нужный элемент, его индекс
 fun squareSequenceDigit(n: Int): Int {
     var aN: Int
     var sequenceMirror = mutableListOf(0)
     var sequence = mutableListOf(0)
     var nul = mutableListOf(0)
 
-    for (i in 1..30) {
+    for (i in 1..31) {
 
         aN = i * i
         while (aN != 0) {
