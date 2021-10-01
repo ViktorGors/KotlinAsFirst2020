@@ -1,7 +1,7 @@
 @file:Suppress("UNUSED_PARAMETER", "ConvertCallChainIntoSequence")
 
 package lesson4.task1
-
+import kotlin.math.pow
 import lesson1.task1.discriminant
 import kotlin.math.sqrt
 
@@ -156,7 +156,12 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  * представленные в виде списков a и b. Скалярное произведение считать по формуле:
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
-fun times(a: List<Int>, b: List<Int>): Int = TODO()
+fun times(a: List<Int>, b: List<Int>): Int {
+    var c = 0
+    if (a.isEmpty() && (b.isEmpty())) c = 0
+    else a.forEachIndexed { index, el -> c += (el * b[index]) }
+    return c
+}
 
 /**
  * Средняя (3 балла)
@@ -166,7 +171,20 @@ fun times(a: List<Int>, b: List<Int>): Int = TODO()
  * Коэффициенты многочлена заданы списком p: (p0, p1, p2, p3, ..., pN).
  * Значение пустого многочлена равно 0 при любом x.
  */
-fun polynom(p: List<Int>, x: Int): Int = TODO()
+
+
+// доделай
+fun polynom(p: List<Int>, x: Int): Int {
+    var px = 0
+    var xN = 1
+    if (p.isEmpty()) px = 0
+    else p.forEachIndexed { index, el ->
+        for (i in 0..index) xN *= x
+        px += el * xN
+        xN = 1
+    }
+    return px
+}
 
 /**
  * Средняя (3 балла)
@@ -178,7 +196,16 @@ fun polynom(p: List<Int>, x: Int): Int = TODO()
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
+fun accumulate(list: MutableList<Int>): MutableList<Int> {
+    var summa = 0
+    var List = list
+    if (List.isEmpty()) return List
+    else List.forEachIndexed { index, el ->
+        summa += el
+        List[index] = summa
+    }
+    return List
+}
 
 /**
  * Средняя (3 балла)
@@ -187,7 +214,19 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
  * Результат разложения вернуть в виде списка множителей, например 75 -> (3, 5, 5).
  * Множители в списке должны располагаться по возрастанию.
  */
-fun factorize(n: Int): List<Int> = TODO()
+fun factorize(n: Int): List<Int> {
+    var divider = 2
+    var N = n
+    val list = mutableListOf<Int>()
+    while (N > 1) {
+        while (N % divider == 0) {
+            list.add(divider)
+            N /= divider
+        }
+        divider += 1
+    }
+    return list
+}
 
 /**
  * Сложная (4 балла)
