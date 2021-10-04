@@ -96,7 +96,7 @@ fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
 //        c -> min(a, b)
 //        else -> maxSideOfTheHole + 1
 //    }
-    return (minSide <= minSideOfTheHole) && (mediumMinSide <= maxSideOfTheHole)
+    return minSide <= minSideOfTheHole && mediumMinSide <= maxSideOfTheHole
 
 }
 
