@@ -297,6 +297,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
 fun squareSequenceDigit(n: Int): Int {
     var aN: Int
     var sequenceMirror = mutableListOf(0)
+    // var sequence = mutableListOf(0)
     var sequence = mutableListOf(0)
     var nul = mutableListOf(0)
 
