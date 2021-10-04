@@ -75,8 +75,8 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun digitNumber(n: Int): Int {
-    var i: Int = 1
-    var N: Int = n
+    var i = 1
+    var N = n
     while (N / 10 != 0) {
         i += 1
         N /= 10
@@ -116,7 +116,7 @@ fun minDivisor(n: Int): Int {
     var divisor: Int = 0
     for (i in 2..n) {
         if (n % i != 0) continue
-        if (n % i == 0) divisor = i
+        divisor = i
         break
     }
     return divisor
@@ -185,7 +185,7 @@ fun lcm(m: Int, n: Int): Int {
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
-    var k = true // если k: true взаимно простые, folse нет
+    var k = true
     var maxNumber: Int = max(m, n)
     for (i in 2..maxNumber)
         if ((m % i == 0) && (n % i == 0)) k = false
@@ -291,9 +291,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-
-//= arrayOf() //.set- заменить опред элемент //.get вывести определенный элемент //.size - кол элемент
-// .forEach перебор масива //indexOf() ищет нужный элемент, его индекс
+// в процессе
 fun squareSequenceDigit(n: Int): Int {
     var aN: Int
     var sequenceMirror = mutableListOf(0)
@@ -350,4 +348,6 @@ fun fibSequenceDigit(n: Int): Int = TODO()
     }
     return sequence.get(n)
 }
+//= arrayOf() //.set- заменить опред элемент //.get вывести определенный элемент //.size - кол элемент
+// .forEach перебор масива //indexOf() ищет нужный элемент, его индекс
  */
