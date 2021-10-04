@@ -90,13 +90,6 @@ fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
     val maxSideOfTheHole = max(r, s)
     val minSide = minOf(a, b, c)
     val mediumMinSide = (a + b + c) - (minSide + maxOf(a, b, c))
-//    val mediumMinSide = when (minSide) {
-//        a -> min(b, c)
-//        b -> min(a, c)
-//        c -> min(a, b)
-//        else -> maxSideOfTheHole + 1
-//    }
     return minSide <= minSideOfTheHole && mediumMinSide <= maxSideOfTheHole
-
 }
 
