@@ -158,8 +158,7 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  */
 fun times(a: List<Int>, b: List<Int>): Int {
     var c = 0
-    if (a.isEmpty() && (b.isEmpty())) c = 0
-    else a.forEachIndexed { index, el -> c += (el * b[index]) }
+    if (a.isNotEmpty() && (b.isNotEmpty())) a.forEachIndexed { index, el -> c += (el * b[index]) }
     return c
 }
 
@@ -235,7 +234,26 @@ fun factorize(n: Int): List<Int> {
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String = TODO()
+fun factorizeToString(n: Int): String {
+    var number = n
+    //var List: String
+    //var list = mutableListOf<Int>()
+    var list = mutableListOf<String>()
+    var List = "0"
+    while (number != 1) {
+        for (i in 1..number) {
+            if (number % i == 0) list.add("$i*")
+            if (number % i == 0) continue
+            number /= i
+            break
+        }
+    }
+    list.forEach { el -> List += "$el" }
+    return List
+   // list.forEach {el -> List = 'el'}
+   // List = "$list"
+    // return List
+}
 
 /**
  * Средняя (3 балла)
