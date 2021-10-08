@@ -172,7 +172,7 @@ fun times(a: List<Int>, b: List<Int>): Int {
  */
 
 
-// доделай
+
 fun polynom(p: List<Int>, x: Int): Int {
     var px = 0
     var xN = 1
@@ -197,13 +197,12 @@ fun polynom(p: List<Int>, x: Int): Int {
  */
 fun accumulate(list: MutableList<Int>): MutableList<Int> {
     var summa = 0
-    var List = list
-    if (List.isEmpty()) return List
-    else List.forEachIndexed { index, el ->
+    if (list.isEmpty()) return list
+    else list.forEachIndexed { index, el ->
         summa += el
-        List[index] = summa
+        list[index] = summa
     }
-    return List
+    return list
 }
 
 /**
@@ -234,26 +233,21 @@ fun factorize(n: Int): List<Int> {
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String {
-    var number = n
-    //var List: String
-    //var list = mutableListOf<Int>()
-    var list = mutableListOf<String>()
-    var List = "0"
-    while (number != 1) {
-        for (i in 1..number) {
-            if (number % i == 0) list.add("$i*")
-            if (number % i == 0) continue
-            number /= i
-            break
-        }
-    }
-    list.forEach { el -> List += "$el" }
-    return List
-   // list.forEach {el -> List = 'el'}
-   // List = "$list"
-    // return List
-}
+//joinToString() на основе предоставленных аргументов объединяет элементы коллекции в строку
+//по кд запятая с пробелом
+//prefix, postfix - то и значат
+//separator - замена запятой с пробелом на то что нужно
+//пример:
+//fun main() {
+//    val numbers = listOf("one", "two", "three", "four")
+//    println(numbers.joinToString(
+//        separator = " | ",
+//        prefix = "start: ",
+//        postfix = ": end"
+//    )) // start: one | two | three | four: end
+//}
+
+fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*")
 
 /**
  * Средняя (3 балла)
