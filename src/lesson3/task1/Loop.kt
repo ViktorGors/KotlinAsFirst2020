@@ -1,7 +1,7 @@
 @file:Suppress("UNUSED_PARAMETER")
 
 package lesson3.task1
-
+import kotlin.math.*
 import kotlinx.html.I
 import kotlin.math.max
 import kotlin.math.sqrt
@@ -258,7 +258,16 @@ fun isPalindrome(n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hasDifferentDigits(n: Int): Boolean = TODO()
+fun hasDifferentDigits(n: Int): Boolean {
+    var lastNum = n % 10
+    var num = n / 10
+    var k = false
+    while (num != 0) {
+        if (num % 10 != lastNum) k = true
+        num /= 10
+    }
+    return k
+}
 
 /**
  * Средняя (4 балла)
@@ -291,29 +300,37 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-// в процессе
+//Найти количество цифр в заданном числе n. fun digitNumber(n: Int)
 fun squareSequenceDigit(n: Int): Int {
-    var aN: Int
-    var sequenceMirror = mutableListOf(0)
-    // var sequence = mutableListOf(0)
-    var sequence = mutableListOf(0)
-    var nul = mutableListOf(0)
-
-    for (i in 1..31) {
-
-        aN = i * i
-        while (aN != 0) {
-            sequenceMirror.add(aN % 10)
-            aN /= 10
+    var iN = 0 // элемент последовательности n с индексом index
+    var index = 0
+    var j = 0 // индекс новой последовательности
+    var N = 0 // искоммый элемент новой последовательности
+    var Size = 0
+    var decomposedIN = mutableListOf<Int>() // разложенный i элемент последовательности будет помещен по честям сюда
+    var decomposedINMirror = mutableListOf<Int>() // отзеркаленный разложенный i элемент последовательности
+    var nul = mutableListOf<Int>() // ноль
+    var contin = true
+    while (contin == true) { // цикл работает пока переменая true
+        index += 1 // индекс элемента
+        iN = index * index // элемент с индексом index
+        while (iN > 0) { // пока элемент можно расскладывать расскладываем
+            decomposedINMirror.add(iN % 10) // элемент по цифорке складываеться в списке, но зеркально
+            iN %= 10
+            Size += 1 // узнаем сколько цифарок в данном элементе который уже разложен
         }
-        while (sequenceMirror != nul) {
-            sequence.add(sequenceMirror.last())
-            sequenceMirror.remove(sequenceMirror.last())
+        for (i in 1..Size) {
+            decomposedIN.add(decomposedINMirror.last()) // зеркалим
+            j += 1 // номер цифарки в новой последовательности
+            if (j == n) contin = false
+            if (j == n) N = decomposedINMirror.last() // если это n, запоминаем данный элемент новый последовательности
+            if (decomposedINMirror.isNotEmpty()) decomposedINMirror.remove(decomposedINMirror.last()) // удоляем перенесенный элемент в адекватный список
         }
-
+        decomposedIN = nul // приравниваем к нулю ибо зачем сохранять не нужную инфу
+        // все поновой пока contin не станет folse
     }
-
-    return sequence.get(n)
+        // ничего не работает, класс...
+    return N
 }
 
 
@@ -329,25 +346,3 @@ fun squareSequenceDigit(n: Int): Int {
  */
 
 fun fibSequenceDigit(n: Int): Int = TODO()
-/**
-{
-    var aN: Int
-    var sequenceMirror = mutableListOf(0)
-    var sequence = mutableListOf(0)
-    var nul = mutableListOf(0)
-    for (i in 1..30) {
-        aN = fib(i) // в теории, должны получаться i элементы, и закидываться в лист. Но выдает ошибку, что лист пуст...
-        while (aN != 0) {
-            sequenceMirror.add(aN % 10)
-            aN /= 10
-        }
-        while (sequenceMirror != nul) {
-            sequence.add(sequenceMirror.last())
-            sequenceMirror.remove(sequenceMirror.last())
-        }
-    }
-    return sequence.get(n)
-}
-//= arrayOf() //.set- заменить опред элемент //.get вывести определенный элемент //.size - кол элемент
-// .forEach перебор масива //indexOf() ищет нужный элемент, его индекс
- */
