@@ -177,10 +177,9 @@ fun polynom(p: List<Int>, x: Int): Int {
     var px = 0
     var xN = 1
     if (p.isEmpty()) px = 0
-    else p.forEachIndexed { index, el ->
-        for (i in 0..index) xN *= x
+    else p.forEach { el ->
         px += el * xN
-        xN = 1
+        xN *= x
     }
     return px
 }
