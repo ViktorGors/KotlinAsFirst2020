@@ -185,11 +185,13 @@ fun lcm(m: Int, n: Int): Int {
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
-    var k = true
-    var maxNumber: Int = max(m, n)
-    for (i in 2..maxNumber)
-        if ((m % i == 0) && (n % i == 0)) k = false
-    return k
+    var M = m
+    var N = n
+    while ((M != 0) && (N != 0)) {
+        if (M <= N) N %= M
+        else M %= N
+    }
+    return max(M, N) == 1
 }
 
 /**
@@ -209,23 +211,13 @@ fun squareBetweenExists(m: Int, n: Int): Boolean = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun revert(n: Int): Int {
-    var N: Int = n
-    var ten: Int = 1
-    var result: Int = 0
-
-    while (N > 0) {
+    var N = n
+    var mirrored = 0
+    while (N != 0) {
+        mirrored = mirrored * 10 + N % 10
         N /= 10
-        ten *= 10
     }
-
-    N = n
-
-    while (N > 0) {
-        result += ((N % 10) * (ten))
-        N /= 10
-        ten /= 10
-    }
-    return (result / 10)
+    return mirrored
 }
 
 /**
@@ -238,26 +230,6 @@ fun revert(n: Int): Int {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun isPalindrome(n: Int): Boolean = TODO()
-
-/** {
-    var N: Int = n
-    var j: Int = 0
-    var ten: Int = 1
-    var k: Boolean = true
-    while (N > 10) {
-        N /= 10
-        ten *= 10
-        j += 1
-    }
-    N = n
-    for (i in 1..j) {
-        if ((N / (ten / i)) % (j - 1) == (N % (10 * i)) / (j - i)) continue
-        if ((N / (ten / i)) % (j - 1) != (N % (10 * i)) / (j - i)) k = false
-        break
-    }
-    return k
-}
-*/
 
 /**
  * Средняя (3 балла)
@@ -310,37 +282,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 //Найти количество цифр в заданном числе n. fun digitNumber(n: Int)
-fun squareSequenceDigit(n: Int): Int {
-    var iN = 0 // элемент последовательности n с индексом index
-    var index = 0
-    var j = 0 // индекс новой последовательности
-    var N = 0 // искоммый элемент новой последовательности
-    var Size = 0
-    var decomposedIN = mutableListOf<Int>() // разложенный i элемент последовательности будет помещен по честям сюда
-    var decomposedINMirror = mutableListOf<Int>() // отзеркаленный разложенный i элемент последовательности
-    var nul = mutableListOf<Int>() // ноль
-    var contin = true
-    while (contin == true) { // цикл работает пока переменая true
-        index += 1 // индекс элемента
-        iN = index * index // элемент с индексом index
-        while (iN > 0) { // пока элемент можно расскладывать расскладываем
-            decomposedINMirror.add(iN % 10) // элемент по цифорке складываеться в списке, но зеркально
-            iN %= 10
-            Size += 1 // узнаем сколько цифарок в данном элементе который уже разложен
-        }
-        for (i in 1..Size) {
-            decomposedIN.add(decomposedINMirror.last()) // зеркалим
-            j += 1 // номер цифарки в новой последовательности
-            if (j == n) contin = false
-            if (j == n) N = decomposedINMirror.last() // если это n, запоминаем данный элемент новый последовательности
-            if (decomposedINMirror.isNotEmpty()) decomposedINMirror.remove(decomposedINMirror.last()) // удоляем перенесенный элемент в адекватный список
-        }
-        decomposedIN = nul // приравниваем к нулю ибо зачем сохранять не нужную инфу
-        // все поновой пока contin не станет folse
-    }
-        // ничего не работает, класс...
-    return N
-}
+fun squareSequenceDigit(n: Int): Int = TODO()
 
 
 
