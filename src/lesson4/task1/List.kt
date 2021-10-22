@@ -255,7 +255,16 @@ fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*
  * Результат перевода вернуть в виде списка цифр в base-ичной системе от старшей к младшей,
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
-fun convert(n: Int, base: Int): List<Int> = TODO()
+fun convert(n: Int, base: Int): List<Int> {
+    var list = mutableListOf<Int>()
+    var N = n
+    while (N != 0) {
+        list.add(N % base)
+        N /= base
+    }
+    list = list.asReversed()
+    return list
+}
 
 /**
  * Сложная (4 балла)
@@ -268,7 +277,15 @@ fun convert(n: Int, base: Int): List<Int> = TODO()
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, n.toString(base) и подобные), запрещается.
  */
-fun convertToString(n: Int, base: Int): String = TODO()
+fun convertToString(n: Int, base: Int): String {
+    var N: String
+    var alphabet = listOf('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z')
+    var list = convert(n, base)
+    return convert(n, base).joinToString(
+        separator = "",
+        transform = { if (it < 10) "$it" else alphabet[it - 10].toString() }
+    )
+}
 
 /**
  * Средняя (3 балла)
@@ -301,13 +318,75 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun roman(n: Int): String = TODO()
-
+fun roman(n: Int): String {
+    var romanNumber = mutableListOf<String>()
+    var number = n
+    var j = 0
+    while (number != 0) {
+        var c = when (j) {
+            0 -> listOf("I", "V", "X")
+            1 -> listOf("X", "L", "C")
+            2 -> listOf("C", "D", "M")
+            else -> listOf("M")
+        }
+        j += 1
+        var num = number % 10
+        number /= 10
+        romanNumber.add(0,
+            if (j > 3) c[0].repeat(num)
+            else {
+                when {
+                    num in 1..3 -> c[0].repeat(num)
+                    num in 4..5 -> c[0].repeat(5 - num) + c[1]
+                    num in 6..8 -> c[1] + c[0].repeat(num - 5)
+                    num == 9 -> c[0].repeat(10 - num) + c[2]
+                    else -> ""
+                }
+            }
+        )
+    }
+    return romanNumber.joinToString(separator = "")
+}
+fun russian(n: Int): String = TODO()
 /**
  * Очень сложная (7 баллов)
  *
  * Записать заданное натуральное число 1..999999 прописью по-русски.
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
- */
-fun russian(n: Int): String = TODO()
+ *
+fun numberSize (n: Int): Int {
+    var N: Int
+    var j = 0
+    N = n
+    while (n > 0) {
+        N /= 10
+        j += 1
+    }
+    return j
+}
+// Numbers = Numbers.asReversed()
+fun russian(n: Int): String {
+    var N = n
+    val units = listOf("один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять") // 1 to 9
+    val tens = listOf("десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто")  //10, 20, 30, 40, 50, 60, 70, 80, 90
+    val hundreds = listOf("сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот") // 100, 200, 300 .. 900
+    val badNumbers = listOf("одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать") // 11, 12, 13, .. 19
+    var Numbers = mutableListOf<Int>()
+    for (i in 1..numberSize(n)) {
+        Numbers.add(N % 10)
+        N /= 10
+    }
+    var stringNumber = mutableListOf<String>()
+    if (n / 1000 != 0) {
+        if (n % 100 in 10..19) {
+            stringNumber.add(
+                index = 0,
+                element = if (n % 100 == 10) tens[0] else badNumbers[n % 10 - 1]
+            )
+        }
+    }
+
+return stringNumber.joinToString(separator = " ")
+}
+        */
