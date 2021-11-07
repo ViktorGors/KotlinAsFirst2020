@@ -170,9 +170,17 @@ fun times(a: List<Int>, b: List<Int>): Int {
  * Коэффициенты многочлена заданы списком p: (p0, p1, p2, p3, ..., pN).
  * Значение пустого многочлена равно 0 при любом x.
  */
+fun polynom(p: List<Int>, x: Int): Int {
+    var px = 0
+    var xN = 1
+    p.forEach { el ->
+        px += el * xN
+        xN *= x
+    }
+    return px
+}
 
-
-
+/**
 fun polynom(p: List<Int>, x: Int): Int {
     var px = 0
     var xN = 1
@@ -183,6 +191,7 @@ fun polynom(p: List<Int>, x: Int): Int {
     }
     return px
 }
+*/
 
 /**
  * Средняя (3 балла)
@@ -196,6 +205,15 @@ fun polynom(p: List<Int>, x: Int): Int {
  */
 fun accumulate(list: MutableList<Int>): MutableList<Int> {
     var summa = 0
+    list.forEachIndexed { index, el ->
+        summa += el
+        list[index] = summa
+    }
+    return list
+}
+/**
+fun accumulate(list: MutableList<Int>): MutableList<Int> {
+    var summa = 0
     if (list.isEmpty()) return list
     else list.forEachIndexed { index, el ->
         summa += el
@@ -203,6 +221,7 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> {
     }
     return list
 }
+*/
 
 /**
  * Средняя (3 балла)
