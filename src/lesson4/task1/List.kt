@@ -158,7 +158,8 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  */
 fun times(a: List<Int>, b: List<Int>): Int {
     var c = 0
-    if (a.isNotEmpty() && (b.isNotEmpty())) a.forEachIndexed { index, el -> c += (el * b[index]) }
+    //if (a.isNotEmpty() && (b.isNotEmpty()))
+    a.forEachIndexed { index, el -> c += (el * b[index]) }
     return c
 }
 
