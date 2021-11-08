@@ -92,10 +92,10 @@ fun digitNumber(n: Int): Int {
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 fun fib(n: Int): Int {
-    var N: Int = 1
-    var fib: Int = 0
-    var fibN: Int = 1
-    var nextFibN: Int = 1
+    var N = 1
+    var fib = 0
+    var fibN = 1
+    var nextFibN = 1
 
     while (n != N) {
         fib = nextFibN
@@ -113,7 +113,7 @@ fun fib(n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var divisor: Int = 0
+    var divisor = 0
     for (i in 2..n) {
         if (n % i != 0) continue
         divisor = i
@@ -127,7 +127,7 @@ fun minDivisor(n: Int): Int {
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
 fun maxDivisor(n: Int): Int {
-    var divisor: Int = 0
+    var divisor = 0
     for (i in 1..n-1) {
         if (n % i == 0) divisor = i
     }
@@ -151,8 +151,8 @@ fun maxDivisor(n: Int): Int {
  * этого для какого-либо начального X > 0.
  */
 fun collatzSteps(x: Int): Int {
-    var i: Int = 0
-    var X: Int = x
+    var i = 0
+    var X = x
     while (X > 1) {
         if (X % 2 == 0) X /= 2
         else X = (3 * X) + 1
@@ -169,8 +169,8 @@ fun collatzSteps(x: Int): Int {
  */
 
 fun lcm(m: Int, n: Int): Int {
-    var M: Int = m
-    var N: Int = n
+    var M = m
+    var N = n
     while ((M != 0) && (N != 0))
         if (M <= N) N %= M else M %= N
     return (m / max(M, N) * n)
