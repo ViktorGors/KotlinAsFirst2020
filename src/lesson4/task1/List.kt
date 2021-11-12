@@ -345,11 +345,11 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
 fun roman(n: Int): String {
-    var romanNumber = mutableListOf<String>()
+    val romanNumber = mutableListOf<String>()
     var number = n
     var j = 0
     while (number != 0) {
-        var c = when (j) {
+        val c = when (j) {
             0 -> listOf("I", "V", "X")
             1 -> listOf("X", "L", "C")
             2 -> listOf("C", "D", "M")
@@ -358,7 +358,7 @@ fun roman(n: Int): String {
         j += 1
         var num = number % 10
         number /= 10
-        romanNumber.add(0,
+        romanNumber.add(
             if (j > 3) c[0].repeat(num)
             else {
                 when {
@@ -371,6 +371,7 @@ fun roman(n: Int): String {
             }
         )
     }
+    romanNumber.reverse()
     return romanNumber.joinToString(separator = "")
 }
 fun russian(n: Int): String = TODO()
