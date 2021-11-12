@@ -298,9 +298,15 @@ fun convert(n: Int, base: Int): List<Int> {
  * (например, n.toString(base) и подобные), запрещается.
  */
 fun convertToString(n: Int, base: Int): String {
-    var N: String
-    var alphabet = listOf('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z')
-    var list = convert(n, base)
+    //var N: String
+    val alphabet =
+        listOf(
+            'a', 'b', 'c', 'd', 'e',
+            'f', 'g', 'h', 'i', 'j',
+            'k', 'l', 'm', 'n', 'o',
+            'p', 'q', 'r', 's', 't',
+            'u', 'v', 'w', 'x', 'y', 'z')
+    // var list = convert(n, base)
     return convert(n, base).joinToString(
         separator = "",
         transform = { if (it < 10) "$it" else alphabet[it - 10].toString() }
