@@ -185,7 +185,15 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  *   averageStockPrice(listOf("MSFT" to 100.0, "MSFT" to 200.0, "NFLX" to 40.0))
  *     -> mapOf("MSFT" to 150.0, "NFLX" to 40.0)
  */
-fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> = TODO()
+fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> {
+    val map = mutableMapOf<String, List<Double>>()
+    for ((stock, price) in stockPrices)
+        if (stock in map) map[stock] = map[stock]!! + price
+        else map[stock] = listOf(price)
+    val result = mutableMapOf<String, Double>()
+    for ((k, v) in map) result[k] = v.sum() / v.size.toDouble()
+    return result
+}
 
 /**
  * Средняя (4 балла)
@@ -202,7 +210,18 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = TODO()
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
+    var resName: String? = null
+    var minCoast: Double? = null
+    for ((name, pair) in stuff)
+        if (((minCoast == null) || (pair.second < minCoast)) //Так можно делать, что бы не выходили длиные строчки условия? Или получаеться не читабельно?
+            && (pair.first == kind)
+        ) {
+            minCoast = pair.second
+            resName = name
+        }
+    return resName
+}
 
 /**
  * Средняя (3 балла)
