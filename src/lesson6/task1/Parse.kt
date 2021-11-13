@@ -73,8 +73,38 @@ fun main() {
  *
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30.02.2009) считается неверными
  * входными данными.
+ * fun timeStrToSeconds(str: String): Int {
+val parts = str.split(":")
+var result = 0
+for (part in parts) {
+val number = part.toInt()
+result = result * 60 + number
+}
+return result
+}
  */
-fun dateStrToDigit(str: String): String = TODO()
+fun dateStrToDigit(str: String): String {
+    var parts = str.split(" ")
+    var result = mutableListOf<String>()
+    for (part in parts) {
+        when (part) {
+            "январь" -> result.add("01")
+            "февраль" -> result.add("02")
+            "марта" -> result.add("03")
+            "апрель" -> result.add("04")
+            "май" -> result.add("05")
+            "июнь" -> result.add("06")
+            "июля" -> result.add("07")
+            "август" -> result.add("08")
+            "сентябрь" -> result.add("09")
+            "октябрь" -> result.add("10")
+            "ноябрь" -> result.add("11")
+            "декабрь" -> result.add("12")
+            else -> result.add("$part")
+        }
+    }
+    return result.joinToString(separator = ".")
+}
 
 /**
  * Средняя (4 балла)
