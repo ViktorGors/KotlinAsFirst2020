@@ -2,6 +2,8 @@
 
 package lesson6.task1
 
+import lesson2.task2.daysInMonth
+
 // Урок 6: разбор строк, исключения
 // Максимальное количество баллов = 13
 // Рекомендуемое количество баллов = 11
@@ -73,6 +75,7 @@ fun main() {
  *
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30.02.2009) считается неверными
  * входными данными.
+ *
  * fun timeStrToSeconds(str: String): Int {
 val parts = str.split(":")
 var result = 0
@@ -84,26 +87,20 @@ return result
 }
  */
 fun dateStrToDigit(str: String): String {
-    var parts = str.split(" ")
-    var result = mutableListOf<String>()
-    for (part in parts) {
-        when (part) {
-            "январь" -> result.add("01")
-            "февраль" -> result.add("02")
-            "марта" -> result.add("03")
-            "апрель" -> result.add("04")
-            "май" -> result.add("05")
-            "июнь" -> result.add("06")
-            "июля" -> result.add("07")
-            "август" -> result.add("08")
-            "сентябрь" -> result.add("09")
-            "октябрь" -> result.add("10")
-            "ноябрь" -> result.add("11")
-            "декабрь" -> result.add("12")
-            else -> result.add("$part")
-        }
-    }
-    return result.joinToString(separator = ".")
+    val mon = listOf(
+        "января", "февраля", "марта",
+        "апреля", "мая", "июня",
+        "июля", "августа", "сентября",
+        "октября", "ноября", "декабря"
+    )
+    val parts = str.split(" ")
+    if (parts.size != 3) return ""
+    val i = mon.indexOf(parts[1])
+    val day = parts[0].toIntOrNull()
+    val month = if (i != -1) i + 1 else return ""
+    val year = parts[2].toIntOrNull()
+    if ((day == null) || (year == null) || (day < 1) || (year < 0) || (day > daysInMonth(month, year))) return ""
+    return "%02d.%02d.%d".format(day, month, year)
 }
 
 /**
@@ -116,7 +113,23 @@ fun dateStrToDigit(str: String): String {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30 февраля 2009) считается неверными
  * входными данными.
  */
-fun dateDigitToStr(digital: String): String = TODO()
+fun dateDigitToStr(digital: String): String {
+    val mon = listOf(
+        "января", "февраля", "марта",
+        "апреля", "мая", "июня",
+        "июля", "августа", "сентября",
+        "октября", "ноября", "декабря"
+    )
+    val parts = digital.split(".")
+    if (parts.size != 3) return ""
+    val day = parts[0].toIntOrNull()
+    val month = parts[1].toIntOrNull()
+    val year = parts[2].toIntOrNull()
+    if ((day == null) || (year == null) || (month == null) ||
+        (month !in 1..12) || (day < 1) || (year < 0) || (day > daysInMonth(month, year))
+    ) return ""
+    return "$day ${mon[month - 1]} $year"
+}
 
 /**
  * Средняя (4 балла)
