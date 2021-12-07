@@ -140,13 +140,12 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>) {
  * Для двух списков людей найти людей, встречающихся в обоих списках.
  * В выходном списке не должно быть повторяющихся элементов,
  * т. е. whoAreInBoth(listOf("Марат", "Семён, "Марат"), listOf("Марат", "Марат")) == listOf("Марат")
+ *
  */
 fun whoAreInBoth(a: List<String>, b: List<String>): List<String> {
     var list = mutableListOf<String>()
-    a.forEachIndexed { indA, elA ->
-        b.forEachIndexed { indB, elB ->
-            if (elA == elB && elA in list != null) list.add(elA)
-        }
+    (a.toSet() + b.toSet()).forEachIndexed { ind, el ->
+        if (el in a && el in b) list.add(el)
     }
     return list
 }
@@ -187,11 +186,13 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  */
 fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> {
     val map = mutableMapOf<String, List<Double>>()
-    for ((stock, price) in stockPrices)
-        if (stock in map) map[stock] = map[stock]!! + price
-        else map[stock] = listOf(price)
     val result = mutableMapOf<String, Double>()
-    for ((k, v) in map) result[k] = v.sum() / v.size.toDouble()
+    for ((stock, price) in stockPrices)
+        if ((stock in map) && (price != null) && (map[stock] != null))
+            map[stock] = map[stock]!! + price
+        else map[stock] = listOf(price)
+    for ((stock, price) in map)
+        result[stock] = price.sum() / price.size
     return result
 }
 
@@ -214,7 +215,7 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
     var resName: String? = null
     var minCoast: Double? = null
     for ((name, pair) in stuff)
-        if (((minCoast == null) || (pair.second < minCoast)) //Так можно делать, что бы не выходили длиные строчки условия? Или получаеться не читабельно?
+        if (((minCoast == null) || (pair.second < minCoast))
             && (pair.first == kind)
         ) {
             minCoast = pair.second
@@ -316,12 +317,13 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  *
  *
- */
+ *
+*/
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
-    val Ind = mutableMapOf<Int, Int>()
+    val map = mutableMapOf<Int, Int>()
     list.forEachIndexed { index, el ->
-        if (list[index] in Ind) return Pair(Ind.getOrDefault(list[index], -1), index)
-        Ind[number - list[index]] = index
+        if ((el in map) && (el != null)) return Pair(map[el]!!, index)
+        map[number - el] = index
     }
     return Pair(-1, -1)
 }
