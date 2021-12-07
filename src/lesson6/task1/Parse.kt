@@ -78,13 +78,15 @@ fun main() {
  *
  *
  */
+val mon = listOf(
+    "января", "февраля", "марта",
+    "апреля", "мая", "июня",
+    "июля", "августа", "сентября",
+    "октября", "ноября", "декабря"
+)
+
 fun dateStrToDigit(str: String): String {
-    val mon = listOf(
-        "января", "февраля", "марта",
-        "апреля", "мая", "июня",
-        "июля", "августа", "сентября",
-        "октября", "ноября", "декабря"
-    )
+
     val parts = str.split(" ")
     if (parts.size != 3) return ""
     val i = mon.indexOf(parts[1])
@@ -106,12 +108,7 @@ fun dateStrToDigit(str: String): String {
  * входными данными.
  */
 fun dateDigitToStr(digital: String): String {
-    val mon = listOf(
-        "января", "февраля", "марта",
-        "апреля", "мая", "июня",
-        "июля", "августа", "сентября",
-        "октября", "ноября", "декабря"
-    )
+
     val parts = digital.split(".")
     if (parts.size != 3) return ""
     val day = parts[0].toIntOrNull()
