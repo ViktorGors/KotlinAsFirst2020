@@ -172,12 +172,7 @@ fun lineByPoints(a: Point, b: Point): Line = TODO()
  * Построить серединный перпендикуляр по отрезку или по двум точкам
  */
 
-fun bisectorByPoints(a: Point, b: Point): Line {
-    fun cornerPoints(a: Point, b: Point): Double =
-        if (a.x == b.x) PI / 2
-        else abs((kotlin.math.atan((a.y - b.y) / (a.x - b.x)) + PI) % PI)
-    return Line(Point((a.x + b.x) / 2, (a.y + b.y) / 2), ((cornerPoints(a, b) + PI / 2) % PI))
-}
+fun bisectorByPoints(a: Point, b: Point): Line = TODO()
 /**
  * Средняя (3 балла)
  *
