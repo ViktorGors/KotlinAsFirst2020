@@ -189,7 +189,7 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
     val result = mutableMapOf<String, Double>()
     for ((stock, price) in stockPrices)
         if (stock in map)
-            map[stock] = map[stock]!! + price
+            map[stock] = (map[stock] ?: listOf(price)) + price
         else map[stock] = listOf(price)
     for ((stock, price) in map)
         result[stock] = price.sum() / price.size
