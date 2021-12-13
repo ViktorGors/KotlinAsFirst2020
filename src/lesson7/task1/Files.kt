@@ -124,12 +124,13 @@ fun centerFile(inputName: String, outputName: String) {
     }
     File(outputName).bufferedWriter().use {
         text.forEach { line ->
-            var result = String.format("% ${(maxLineLength + line.length) / 2} s", line) + " \n "
+            var result = String.format("%${(maxLineLength + line.length) / 2}s", line) + "\n"
             it.write(result)
             print(result)
         }
     }
 }
+
 
 /**
  * Сложная (20 баллов)
