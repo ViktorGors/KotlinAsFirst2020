@@ -188,7 +188,7 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
     val map = mutableMapOf<String, List<Double>>()
     val result = mutableMapOf<String, Double>()
     for ((stock, price) in stockPrices)
-        if ((stock in map) && (price != null) && (map[stock] != null))
+        if (stock in map)
             map[stock] = map[stock]!! + price
         else map[stock] = listOf(price)
     for ((stock, price) in map)
@@ -322,7 +322,7 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     val map = mutableMapOf<Int, Int>()
     list.forEachIndexed { index, el ->
-        if ((el in map) && (el != null)) return Pair(map[el]!!, index)
+        if (el in map) return Pair(map[el]!!, index)
         map[number - el] = index
     }
     return Pair(-1, -1)

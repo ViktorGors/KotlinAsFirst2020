@@ -3,6 +3,7 @@
 package lesson6.task1
 
 import lesson2.task2.daysInMonth
+import kotlin.math.max
 
 // Урок 6: разбор строк, исключения
 // Максимальное количество баллов = 13
@@ -146,7 +147,18 @@ fun flattenPhoneNumber(phone: String): String = TODO()
  * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в примере).
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
-fun bestLongJump(jumps: String): Int = TODO()
+fun bestLongJump(jumps: String): Int {
+    val parts = jumps.split(" ")
+    var bestLongJump = mutableListOf(-1) // самое большое отрицательное и натуральное число -1, если у нас прыжок будет отрицательным, вернеться -1 в любом случае.
+    parts.forEach { el ->
+        if ((el != "-") && (el != "%"))
+            try {
+                var number = el.toIntOrNull() ?: return -1
+                bestLongJump.add(number)
+            } catch (a: NumberFormatException) { return -1 }
+    }
+    return bestLongJump.maxOrNull() ?: return -1
+}
 
 /**
  * Сложная (6 баллов)
@@ -170,7 +182,19 @@ fun bestHighJump(jumps: String): Int = TODO()
  * Вернуть значение выражения (6 для примера).
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
-fun plusMinus(expression: String): Int = TODO()
+fun plusMinus(expression: String): Int {
+    val parts = expression.split(" ")
+    var result = 0
+    var sign = 1
+    parts.forEachIndexed { ind, el ->
+        if ((ind % 2 == 0) && (el.all { it in '0'..'9' }))
+            result += (el.toIntOrNull() ?: throw IllegalArgumentException()) * sign
+        else if (el == "+") sign = 1
+        else if (el == "-") sign = -1
+        else throw IllegalArgumentException()
+    }
+    return result
+}
 
 /**
  * Сложная (6 баллов)
@@ -181,7 +205,9 @@ fun plusMinus(expression: String): Int = TODO()
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
-fun firstDuplicateIndex(str: String): Int = TODO()
+fun firstDuplicateIndex(str: String): Int {
+    return -1
+}
 
 /**
  * Сложная (6 баллов)
@@ -194,7 +220,22 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть больше нуля либо равны нулю.
  */
-fun mostExpensive(description: String): String = TODO()
+fun mostExpensive(description: String): String {
+    var mostExpensive = 0.0
+    var mostExpensiveProduct = ""
+    val parts = description.split("; ")
+    parts.forEachIndexed { ind, el ->
+        if (el.split(" ").size != 2) return ""
+        var productAndExpensive = el.split(" ") // содержит товар product и цену expensive
+        var expensive = productAndExpensive[1].toDoubleOrNull() ?: return ""
+        if (expensive < 0.0) return ""
+        if (expensive > mostExpensive) {
+            mostExpensive = expensive
+            mostExpensiveProduct = productAndExpensive[0]
+        }
+    }
+    return mostExpensiveProduct
+}
 
 /**
  * Сложная (6 баллов)

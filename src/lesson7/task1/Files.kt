@@ -109,11 +109,26 @@ fun sibilants(inputName: String, outputName: String) {
  * 1) Пробелы в начале и в конце всех строк не следует сохранять.
  * 2) В случае невозможности выравнивания строго по центру, строка должна быть сдвинута в ЛЕВУЮ сторону
  * 3) Пустые строки не являются особым случаем, их тоже следует выравнивать
- * 4) Число строк в выходном файле должно быть равно числу строк во входном (в т. ч. пустых)
- *
+ * 4) Число строк в выходном файле должно быть равно числу строк во входном (в т. ч. пустых) originalText
+ * ======================================================================
+ * """ String.trim() """ — удаление из строки пробельных символов в начале и конце
+ * ======================================================================
  */
 fun centerFile(inputName: String, outputName: String) {
-    TODO()
+    val text = mutableListOf<String>()
+    var maxLineLength = 0
+    File(inputName).readLines().forEach { line ->
+        var newLine = line.trim()
+        text.add(newLine)
+        if (maxLineLength < newLine.length) maxLineLength = newLine.length
+    }
+    File(outputName).bufferedWriter().use {
+        text.forEach { line ->
+            var result = String.format("% ${(maxLineLength + line.length) / 2} s", line) + " \n "
+            it.write(result)
+            print(result)
+        }
+    }
 }
 
 /**
@@ -127,24 +142,73 @@ fun centerFile(inputName: String, outputName: String) {
  * Слова внутри строки отделяются друг от друга одним или более пробелом.
  *
  * Следующие правила должны быть выполнены:
+ *
  * 1) Каждая строка входного и выходного файла не должна начинаться или заканчиваться пробелом.
+ *
  * 2) Пустые строки или строки из пробелов трансформируются в пустые строки без пробелов.
+ *
  * 3) Строки из одного слова выводятся без пробелов.
+ *
  * 4) Число строк в выходном файле должно быть равно числу строк во входном (в т. ч. пустых).
  *
  * Равномерность определяется следующими формальными правилами:
+ *
  * 5) Число пробелов между каждыми двумя парами соседних слов не должно отличаться более, чем на 1.
+ *
  * 6) Число пробелов между более левой парой соседних слов должно быть больше или равно числу пробелов
  *    между более правой парой соседних слов.
  *
  * Следует учесть, что входной файл может содержать последовательности из нескольких пробелов  между слвоами. Такие
  * последовательности следует учитывать при выравнивании и при необходимости избавляться от лишних пробелов.
  * Из этого следуют следующие правила:
+ *
  * 7) В самой длинной строке каждая пара соседних слов должна быть отделена В ТОЧНОСТИ одним пробелом
+ *
  * 8) Если входной файл удовлетворяет требованиям 1-7, то он должен быть в точности идентичен выходному файлу
+ * //сугубо для себя:
+ *======================================================================
+ * reduce сводит все значения потока к одному значению:
+ * val numberFlow = listOf(1, 2, 3, 4, 5)
+ * val reducedValue = numberFlow.reduce{ a, b -> a + b }
+ * println(reducedValue)   // 15
+ *======================================================================
+ * fold также сводит все элементы потока в один. НО! fold в качестве первого параметра принимает начальное значение:
+ * val userFlow = listOf("Tom", "Bob", "Kate", "Sam", "Alice").asFlow()
+ * val foldedValue = userFlow.fold("Users:", { a, b -> a + " " + b })
+ * println(foldedValue)   // Users: Tom Bob Kate Sam Alice
+ *======================================================================
+ *
  */
 fun alignFileByWidth(inputName: String, outputName: String) {
-    TODO()
+    val text = mutableListOf<List<String>>()
+    var maxLineLength = 0
+    val linesLenght = mutableListOf<Int>()
+    File(inputName).readLines().forEach { line ->
+        var result = line.trim().split(" ").filter { it != "" }
+        var sizeWords = result.fold(0) { el, it -> el + it.length }
+        if (sizeWords != 0) sizeWords += (result.size - 1)
+        linesLenght.add(sizeWords)
+        if (maxLineLength < sizeWords) maxLineLength = sizeWords
+        if (result.isEmpty()) text.add(listOf(""))
+        else text.add(result)
+    }
+    File(outputName).bufferedWriter().use {
+        for ((index, line) in text.withIndex()) {
+            if (line.size == 1) {
+                it.write(line[0] + "\n")
+                continue
+            }
+            var counter = line.size - 1
+            var difference = maxLineLength - linesLenght[index]
+            var div = difference / counter
+            var mod = difference % counter
+            for (ind in 0..(line.size - 2)) {
+                it.write(line[ind] + " ".repeat(div + 1 + (if (mod > 0) 1 else 0)))
+                mod -= 1
+            }
+            it.write(line.last() + "\n")
+        }
+    }
 }
 
 /**
