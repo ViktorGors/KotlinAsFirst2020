@@ -303,22 +303,7 @@ fun convert(n: Int, base: Int): List<Int> {
  */
 fun convertToString(n: Int, base: Int): String = TODO()
 
-/**
- * Активно работаю над исправлением проблемы.
-fun convertToString(n: Int, base: Int): String {
-    val alphabet =
-        listOf(
-            'a', 'b', 'c', 'd', 'e',
-            'f', 'g', 'h', 'i', 'j',
-            'k', 'l', 'm', 'n', 'o',
-            'p', 'q', 'r', 's', 't',
-            'u', 'v', 'w', 'x', 'y', 'z')
-    return convert(n, base).joinToString(
-        separator = "",
-        transform = { if (it < 10) "$it" else alphabet[it - 10].toString() }
-    )
-}
- */
+
 
 /**
  * Средняя (3 балла)
@@ -389,38 +374,4 @@ fun russian(n: Int): String = TODO()
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  *
-fun numberSize (n: Int): Int {
-    var N: Int
-    var j = 0
-    N = n
-    while (n > 0) {
-        N /= 10
-        j += 1
-    }
-    return j
-}
-// Numbers = Numbers.asReversed()
-fun russian(n: Int): String {
-    var N = n
-    val units = listOf("один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять") // 1 to 9
-    val tens = listOf("десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто")  //10, 20, 30, 40, 50, 60, 70, 80, 90
-    val hundreds = listOf("сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот") // 100, 200, 300 .. 900
-    val badNumbers = listOf("одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать") // 11, 12, 13, .. 19
-    var Numbers = mutableListOf<Int>()
-    for (i in 1..numberSize(n)) {
-        Numbers.add(N % 10)
-        N /= 10
-    }
-    var stringNumber = mutableListOf<String>()
-    if (n / 1000 != 0) {
-        if (n % 100 in 10..19) {
-            stringNumber.add(
-                index = 0,
-                element = if (n % 100 == 10) tens[0] else badNumbers[n % 10 - 1]
-            )
-        }
-    }
-
-return stringNumber.joinToString(separator = " ")
-}
-        */
+*/
