@@ -144,7 +144,7 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>) {
  */
 fun whoAreInBoth(a: List<String>, b: List<String>): List<String> {
     var list = mutableListOf<String>()
-    (a.toSet() + b.toSet()).forEachIndexed { ind, el ->
+    (a.toSet() + b.toSet()).forEach { el ->
         if (el in a && el in b) list.add(el)
     }
     return list

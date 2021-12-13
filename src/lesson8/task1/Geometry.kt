@@ -3,10 +3,7 @@
 package lesson8.task1
 
 import lesson1.task1.sqr
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
-import kotlin.math.sqrt
+import kotlin.math.*
 
 // Урок 8: простые классы
 // Максимальное количество баллов = 40 (без очень трудных задач = 11)
@@ -170,8 +167,13 @@ fun lineByPoints(a: Point, b: Point): Line = TODO()
  *
  * Построить серединный перпендикуляр по отрезку или по двум точкам
  */
-fun bisectorByPoints(a: Point, b: Point): Line = TODO()
 
+fun bisectorByPoints(a: Point, b: Point): Line {
+    fun cornerPoints(a: Point, b: Point): Double =
+        if (a.x == b.x) PI / 2
+        else abs((kotlin.math.atan((a.y - b.y) / (a.x - b.x)) + PI) % PI)
+    return Line(Point((a.x + b.x) / 2, (a.y + b.y) / 2), ((cornerPoints(a, b) + PI / 2) % PI))
+}
 /**
  * Средняя (3 балла)
  *
@@ -195,7 +197,11 @@ fun findNearestCirclePair(vararg circles: Circle): Pair<Circle, Circle> = TODO()
  * (построить окружность по трём точкам, или
  * построить окружность, описанную вокруг треугольника - эквивалентная задача).
  */
-fun circleByThreePoints(a: Point, b: Point, c: Point): Circle = TODO()
+fun circleByThreePoints(a: Point, b: Point, c: Point): Circle {
+    val O = bisectorByPoints(a, b).crossPoint(bisectorByPoints(a, c))
+    val R = a.distance(O)
+    return Circle(O, R)
+}
 
 /**
  * Очень сложная (10 баллов)
