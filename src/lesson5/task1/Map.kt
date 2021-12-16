@@ -2,6 +2,8 @@
 
 package lesson5.task1
 
+import java.io.File.separator
+
 // Урок 5: ассоциативные массивы и множества
 // Максимальное количество баллов = 14
 // Рекомендуемое количество баллов = 9
@@ -350,3 +352,40 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
  *   ) -> emptySet()
  */
 fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = TODO()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+fun myFunRepet(input: String): String {
+    if (input.isEmpty()) return ""
+    var i = 1
+    var lastC: Char
+    var result = mutableListOf<String>()
+    input.forEachIndexed { index, c ->
+        if (index > 0)
+            if (input[index - 1] == input[index]) i += 1 else {
+                lastC = input[index - 1]
+                qwe(i, lastC, result)
+                i = 1
+            }
+    }
+    lastC = input.last()
+    qwe(i, lastC, result)
+    return result.joinToString(separator = "")
+}
+fun qwe(i:Int, lastC: Char, result: MutableList<String>)
+{
+    result.add(if (i > 1) "$lastC$i" else "$lastC")
+}
+
