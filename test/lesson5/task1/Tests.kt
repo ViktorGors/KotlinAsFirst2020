@@ -336,4 +336,16 @@ class Tests {
             )
         )
     }
+
+    @Test
+    @Tag("8")
+    fun myFunRepet() {
+        assertEquals( "a3bab2cb3", myFunRepet("aaababbcbbb"))
+        assertEquals( "c", myFunRepet("c"))
+        assertEquals( "c2d2", myFunRepet("ccdd"))
+        assertEquals( "", myFunRepet(""))
+
+    }
+
+
 }
